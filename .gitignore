@@ -1,0 +1,97 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Python tooling / cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# Editor / IDE
+# =========================
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Kubernetes sensitive files
+kubeconfig
+*.kubeconfig
+**/kubeconfig*
+**/secret*.yaml
+**/*secret*.yaml
+
+# =========================
+# Logs / temp files
+# =========================
+*.log
+*.tmp
+*.swp
+*.swo
+
+# =========================
+# Benchmark / experiment outputs
+# =========================
+
+# Ignore everything under results by default
+results/*
+
+# Keep curated evidence for GitHub
+!results/evidence/
+!results/evidence/**
+
+# Keep folder placeholders
+!results/**/.gitkeep
+
+# Ignore raw logs and temporary outputs anywhere
+*.log
+*.tmp
+*.pid
+*.jsonl
+*.ndjson
+
+# =========================
+# Large model / dataset files
+# =========================
+models/
+datasets/
+.cache/
+hf_cache/
+
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.gguf
+*.onnx

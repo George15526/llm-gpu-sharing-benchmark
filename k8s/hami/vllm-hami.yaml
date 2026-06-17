@@ -1,0 +1,55 @@
+# k8s/vllm-hami.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-hami
+  labels:
+    app: vllm
+    mode: hami
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm
+      mode: hami
+  template:
+    metadata:
+      labels:
+        app: vllm
+        mode: hami
+      annotations:
+        nvidia.com/vgpu-mode: "hami-core"
+    spec:
+      schedulerName: hami-scheduler
+      containers:
+      - name: vllm
+        image: vllm/vllm-openai:v0.8.5
+        ports:
+        - containerPort: 8000
+        env:
+        - name: HF_HOME
+          value: /models
+        command:
+        - bash
+        - -lc
+        - |
+          python3 -m vllm.entrypoints.openai.api_server \
+            --host 0.0.0.0 \
+            --port 8000 \
+            --model Qwen/Qwen2.5-0.5B-Instruct \
+            --dtype half \
+            --max-model-len 2048 \
+            --gpu-memory-utilization 0.80
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            nvidia.com/gpumem: 6000
+            nvidia.com/gpucores: 50
+        volumeMounts:
+        - name: model-cache
+          mountPath: /models
+      volumes:
+      - name: model-cache
+        hostPath:
+          path: /data/hf-cache
+          type: DirectoryOrCreate
