@@ -1,0 +1,3 @@
+NAME                                READY   STATUS    RESTARTS   AGE   IP             NODE         NOMINATED NODE   READINESS GATES
+vllm-timeslicing-54658c8db9-9klsd   1/1     Running   0          77s   10.244.0.239   wtlee4070s   <none>           <none>
+vllm-timeslicing-54658c8db9-dd5mc   1/1     Running   0          77s   10.244.0.238   wtlee4070s   <none>           <none>

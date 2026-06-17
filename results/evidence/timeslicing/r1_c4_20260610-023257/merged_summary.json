@@ -1,0 +1,35 @@
+{
+  "mode": "timeslicing",
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "num_requests": 100,
+  "concurrency": 4,
+  "max_tokens": 128,
+  "endpoint_count": 1,
+  "endpoints": [
+    "http://10.244.0.237:8000"
+  ],
+  "endpoint_request_count": {
+    "http://10.244.0.237:8000": 100
+  },
+  "warmup_requests_per_endpoint": 3,
+  "warmup_total_requests": 3,
+  "success_count": 100,
+  "failed_count": 0,
+  "duration_sec": 40.12121953099995,
+  "requests_per_sec": 2.4924466695917427,
+  "output_tokens_per_sec": 319.03317370774306,
+  "e2e_latency_avg_ms": 1580.7114189901768,
+  "e2e_latency_p50_ms": 1604.420081996068,
+  "e2e_latency_p95_ms": 1610.405768995406,
+  "e2e_latency_p99_ms": 1613.3188899984816,
+  "ttft_avg_ms": 1182.915990780457,
+  "ttft_p50_ms": 1206.6309669971815,
+  "ttft_p95_ms": 1212.1560890009278,
+  "ttft_p99_ms": 1214.091701003781,
+  "gpu_util_avg_pct": 42.392857142857146,
+  "gpu_util_max_pct": 90.0,
+  "gpu_mem_used_avg_mib": 2146.404761904762,
+  "gpu_mem_used_max_mib": 4289.0,
+  "gpu_power_avg_w": 72.475,
+  "gpu_power_max_w": 148.59
+}

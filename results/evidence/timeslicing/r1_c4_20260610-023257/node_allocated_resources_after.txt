@@ -1,0 +1,47 @@
+# Extracted from: node_describe_after.txt
+# Generated at: 2026-06-17T01:46:39Z
+
+Capacity:
+  cpu:                32
+  ephemeral-storage:  102626232Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             64286852Ki
+  nvidia.com/gpu:     8
+  pods:               110
+Allocatable:
+  cpu:                32
+  ephemeral-storage:  94580335255
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             64184452Ki
+  nvidia.com/gpu:     8
+  pods:               110
+Non-terminated Pods:          (14 in total)
+  Namespace                   Name                                                               CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                                               ------------  ----------  ---------------  -------------  ---
+  default                     vllm-timeslicing-54658c8db9-m8rd2                                  0 (0%)        0 (0%)      0 (0%)           0 (0%)         93s
+  kube-flannel                kube-flannel-ds-b5w4m                                              100m (0%)     0 (0%)      50Mi (0%)        0 (0%)         13d
+  kube-system                 coredns-7c65d6cfc9-6vzhm                                           100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     13d
+  kube-system                 coredns-7c65d6cfc9-78zrx                                           100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     13d
+  kube-system                 etcd-wtlee4070s                                                    100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         9d
+  kube-system                 kube-apiserver-wtlee4070s                                          250m (0%)     0 (0%)      0 (0%)           0 (0%)         9d
+  kube-system                 kube-controller-manager-wtlee4070s                                 200m (0%)     0 (0%)      0 (0%)           0 (0%)         9d
+  kube-system                 kube-proxy-tgbtd                                                   0 (0%)        0 (0%)      0 (0%)           0 (0%)         13d
+  kube-system                 kube-scheduler-wtlee4070s                                          100m (0%)     0 (0%)      0 (0%)           0 (0%)         9d
+  kube-system                 nvidia-device-plugin-254fr                                         0 (0%)        0 (0%)      0 (0%)           0 (0%)         9d
+  kube-system                 nvidia-device-plugin-gpu-feature-discovery-4r82g                   0 (0%)        0 (0%)      0 (0%)           0 (0%)         9d
+  kube-system                 nvidia-device-plugin-node-feature-discovery-gc-5ff7b677d-cz9lx     10m (0%)      0 (0%)      128Mi (0%)       1Gi (1%)       9d
+  kube-system                 nvidia-device-plugin-node-feature-discovery-master-586bb6bnhsjx    100m (0%)     0 (0%)      128Mi (0%)       4Gi (6%)       9d
+  kube-system                 nvidia-device-plugin-node-feature-discovery-worker-d9xpk           5m (0%)       0 (0%)      64Mi (0%)        512Mi (0%)     9d
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                1065m (3%)  0 (0%)
+  memory             610Mi (0%)  5972Mi (9%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+  nvidia.com/gpu     1           1
+Events:              <none>

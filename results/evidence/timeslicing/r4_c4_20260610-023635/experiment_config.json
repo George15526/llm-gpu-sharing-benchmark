@@ -1,0 +1,13 @@
+{
+  "mode": "timeslicing",
+  "replicas": 4,
+  "concurrency": 4,
+  "num_requests": 100,
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "max_tokens": 128,
+  "warmup_requests_per_endpoint": 3,
+  "endpoint_count": 4,
+  "endpoints": "http://10.244.0.240:8000,http://10.244.0.241:8000,http://10.244.0.242:8000,http://10.244.0.243:8000",
+  "node_name": "wtlee4070s",
+  "deploy_manifest": "k8s/timeslicing/vllm-timeslicing.yaml"
+}
