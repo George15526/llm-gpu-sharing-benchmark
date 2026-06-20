@@ -1,4 +1,3 @@
-# k8s/vllm-hami.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -6,45 +5,61 @@ metadata:
   labels:
     app: vllm
     mode: hami
+    profile: config-aligned
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: vllm
       mode: hami
+      profile: config-aligned
   template:
     metadata:
       labels:
         app: vllm
         mode: hami
-      annotations:
-        nvidia.com/vgpu-mode: "hami-core"
+        profile: config-aligned
     spec:
       schedulerName: hami-scheduler
+      runtimeClassName: nvidia
+      terminationGracePeriodSeconds: 30
       containers:
       - name: vllm
         image: vllm/vllm-openai:v0.8.5
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /v1/models
+            port: 8000
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 60
         env:
         - name: HF_HOME
           value: /models
+        - name: VLLM_USE_V1
+          value: "0"
+        - name: PYTORCH_CUDA_ALLOC_CONF
+          value: expandable_segments:True
         command:
         - bash
         - -lc
         - |
-          python3 -m vllm.entrypoints.openai.api_server \
+          exec python3 -m vllm.entrypoints.openai.api_server \
             --host 0.0.0.0 \
             --port 8000 \
             --model Qwen/Qwen2.5-0.5B-Instruct \
             --dtype half \
-            --max-model-len 2048 \
-            --gpu-memory-utilization 0.80
+            --max-model-len 512 \
+            --max-num-seqs 1 \
+            --gpu-memory-utilization 0.18 \
+            --enforce-eager
         resources:
           limits:
             nvidia.com/gpu: 1
-            nvidia.com/gpumem: 6000
-            nvidia.com/gpucores: 50
         volumeMounts:
         - name: model-cache
           mountPath: /models

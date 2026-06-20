@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-hami
+  labels:
+    app: vllm
+    mode: hami
+    profile: controlled
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm
+      mode: hami
+      profile: controlled
+  template:
+    metadata:
+      labels:
+        app: vllm
+        mode: hami
+        profile: controlled
+    spec:
+      schedulerName: hami-scheduler
+      runtimeClassName: nvidia
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: vllm
+        image: vllm/vllm-openai:v0.8.5
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /v1/models
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 60
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - bash
+              - -lc
+              - |
+                pkill -TERM -f 'vllm.entrypoints.openai.api_server|multiprocessing' || true
+                sleep 3
+                pkill -KILL -f 'vllm.entrypoints.openai.api_server|multiprocessing' || true
+        env:
+        - name: HF_HOME
+          value: /models
+        - name: PYTORCH_CUDA_ALLOC_CONF
+          value: expandable_segments:True
+        command:
+        - bash
+        - -lc
+        - |
+          exec python3 -m vllm.entrypoints.openai.api_server \
+            --host 0.0.0.0 \
+            --port 8000 \
+            --model Qwen/Qwen2.5-0.5B-Instruct \
+            --dtype half \
+            --max-model-len 512 \
+            --max-num-seqs 1 \
+            --gpu-memory-utilization 0.18
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            nvidia.com/gpumem: 3500
+            nvidia.com/gpucores: 25
+        volumeMounts:
+        - name: model-cache
+          mountPath: /models
+      volumes:
+      - name: model-cache
+        hostPath:
+          path: /data/hf-cache
+          type: DirectoryOrCreate
