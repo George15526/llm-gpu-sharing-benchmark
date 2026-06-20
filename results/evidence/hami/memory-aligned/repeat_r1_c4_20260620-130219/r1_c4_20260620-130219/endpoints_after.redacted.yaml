@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2026-06-20T05:04:30Z"
+  creationTimestamp: "2026-06-20T05:02:20Z"
+  name: vllm-service
+  namespace: default
+  resourceVersion: "35778"
+  uid: <UUID_REDACTED>
+subsets:
+- addresses:
+  - ip: <IP_REDACTED>
+    nodeName: <NODE_NAME_REDACTED>
+    targetRef:
+      kind: Pod
+      name: vllm-hami-7d6c49b7db-gt8gb
+      namespace: default
+      uid: <UUID_REDACTED>
+  ports:
+  - name: http
+    port: 8000
+    protocol: TCP

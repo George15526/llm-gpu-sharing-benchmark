@@ -1,0 +1,2 @@
+NAME           ENDPOINTS          AGE
+vllm-service   <IP_REDACTED>:8000   7m9s

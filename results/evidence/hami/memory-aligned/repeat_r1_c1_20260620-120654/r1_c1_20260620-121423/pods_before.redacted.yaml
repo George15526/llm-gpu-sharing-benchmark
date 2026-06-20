@@ -1,0 +1,189 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      hami.io/bind-phase: success
+      hami.io/bind-time: "1781928864"
+      hami.io/vgpu-devices-allocated: GPU-<UUID_REDACTED>,NVIDIA,6000,0:;
+      hami.io/vgpu-devices-to-allocate: ;;
+      hami.io/vgpu-node: <NODE_NAME_REDACTED>
+      hami.io/vgpu-time: "1781928864"
+    creationTimestamp: "2026-06-20T04:14:24Z"
+    generateName: vllm-hami-7d6c49b7db-
+    labels:
+      app: vllm
+      hami.io/vgpu-node: <NODE_NAME_REDACTED>
+      mode: hami
+      pod-template-hash: 7d6c49b7db
+      profile: memory-aligned
+    name: vllm-hami-7d6c49b7db-2gcvs
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: vllm-hami-7d6c49b7db
+      uid: <UUID_REDACTED>
+    resourceVersion: "30003"
+    uid: <UUID_REDACTED>
+  spec:
+    containers:
+    - command:
+      - bash
+      - -lc
+      - |
+        exec python3 -m vllm.entrypoints.openai.api_server \
+          --host <IP_REDACTED> \
+          --port 8000 \
+          --model Qwen/Qwen2.5-0.5B-Instruct \
+          --dtype half \
+          --max-model-len 512 \
+          --max-num-seqs 1 \
+          --gpu-memory-utilization 0.30 \
+          --enforce-eager
+      env:
+      - name: HF_HOME
+        value: /models
+      - name: PYTORCH_CUDA_ALLOC_CONF
+        value: expandable_segments:True
+      image: vllm/vllm-openai:v0.8.5
+      imagePullPolicy: IfNotPresent
+      lifecycle:
+        preStop:
+          exec:
+            command:
+            - bash
+            - -lc
+            - |
+              pkill -TERM -f 'vllm.entrypoints.openai.api_server|multiprocessing' || true
+              sleep 2
+              pkill -KILL -f 'vllm.entrypoints.openai.api_server|multiprocessing' || true
+      name: vllm
+      ports:
+      - containerPort: 8000
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 60
+        httpGet:
+          path: /v1/models
+          port: 8000
+          scheme: HTTP
+        initialDelaySeconds: 120
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        limits:
+          nvidia.com/gpu: "1"
+          nvidia.com/gpumem: 6k
+        requests:
+          nvidia.com/gpu: "1"
+          nvidia.com/gpumem: 6k
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /models
+        name: model-cache
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5wf7q
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: <NODE_NAME_REDACTED>
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    runtimeClassName: nvidia
+    schedulerName: hami-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 10
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - hostPath:
+        path: /data/<HF_CACHE_REDACTED>
+        type: DirectoryOrCreate
+      name: model-cache
+    - name: kube-api-access-5wf7q
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-20T04:14:25Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-20T04:14:24Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-20T04:16:24Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-20T04:16:24Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-06-20T04:14:24Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://<CONTAINER_ID_REDACTED>
+      image: docker.io/vllm/vllm-openai:v0.8.5
+      imageID: docker.io/vllm/vllm-openai@sha256:6cf9808ca8810fc6c3fd0451c2e7784fb224590d81f7db338e7eaf3c02a33d33
+      lastState: {}
+      name: vllm
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2026-06-20T04:14:24Z"
+      volumeMounts:
+      - mountPath: /models
+        name: model-cache
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-5wf7q
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: <IP_REDACTED>
+    hostIPs:
+    - ip: <IP_REDACTED>
+    phase: Running
+    podIP: <IP_REDACTED>
+    podIPs:
+    - ip: <IP_REDACTED>
+    qosClass: BestEffort
+    startTime: "2026-06-20T04:14:24Z"
+kind: List
+metadata:
+  resourceVersion: ""

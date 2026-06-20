@@ -1,0 +1,3 @@
+NAME                         READY   STATUS    RESTARTS   AGE     IP            NODE                NOMINATED NODE   READINESS GATES
+vllm-hami-7d6c49b7db-4zg45   1/1     Running   0          3m29s   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>
+vllm-hami-7d6c49b7db-rmdbq   1/1     Running   0          3m29s   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>

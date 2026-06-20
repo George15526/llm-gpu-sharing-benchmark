@@ -1,0 +1,2 @@
+NAME           ENDPOINTS                           AGE
+vllm-service   <IP_REDACTED>:8000,<IP_REDACTED>:8000   2m3s

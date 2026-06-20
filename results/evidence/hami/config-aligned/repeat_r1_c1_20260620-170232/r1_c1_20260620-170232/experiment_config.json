@@ -1,0 +1,16 @@
+{
+  "mode": "hami",
+  "hami_profile": "config-aligned",
+  "replicas": 1,
+  "concurrency": 1,
+  "num_requests": 100,
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "max_tokens": 128,
+  "warmup_requests_per_endpoint": 3,
+  "endpoint_count": 1,
+  "endpoints": "http://<ENDPOINT_REDACTED>",
+  "node_name": "<NODE_NAME_REDACTED>",
+  "deploy_manifest": "k8s/hami/vllm-hami-config-aligned.yaml",
+  "out_dir": "results/hami/config-aligned/repeat_r1_c1_20260620-170232/r1_c1_20260620-170232",
+  "timestamp": "20260620-170232"
+}

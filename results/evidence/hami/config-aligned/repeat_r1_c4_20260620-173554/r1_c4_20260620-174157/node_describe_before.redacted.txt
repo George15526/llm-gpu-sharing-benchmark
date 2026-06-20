@@ -1,0 +1,93 @@
+Name:               <NODE_NAME_REDACTED>
+Roles:              control-plane,worker
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    gpu=on
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=<NODE_NAME_REDACTED>
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+                    node-role.kubernetes.io/worker=worker
+                    node.kubernetes.io/exclude-from-external-load-balancers=
+Annotations:        flannel.alpha.coreos.com/backend-data: {"VNI":1,"VtepMAC":"be:51:0c:31:6d:5e"}
+                    flannel.alpha.coreos.com/backend-type: vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager: true
+                    flannel.alpha.coreos.com/public-ip: <IP_REDACTED>
+                    hami.io/node-handshake: Requesting_2026-06-20 00:15:47
+                    hami.io/node-nvidia-register:
+                      [{"id":"GPU-<UUID_REDACTED>","count":10,"devmem":16380,"devcore":100,"type":"NVIDIA RTX 2000 Ada Generation","mode":"...
+                    kubeadm.alpha.kubernetes.io/cri-socket: unix:///run/containerd/containerd.sock
+                    node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Sat, 20 Jun 2026 08:06:10 +0800
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  <NODE_NAME_REDACTED>
+  AcquireTime:     <unset>
+  RenewTime:       Sat, 20 Jun 2026 17:41:51 +0800
+Conditions:
+  Type                 Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----                 ------  -----------------                 ------------------                ------                       -------
+  NetworkUnavailable   False   Sat, 20 Jun 2026 08:14:11 +0800   Sat, 20 Jun 2026 08:14:11 +0800   FlannelIsUp                  Flannel is running on this node
+  MemoryPressure       False   Sat, 20 Jun 2026 17:40:16 +0800   Sat, 20 Jun 2026 08:06:09 +0800   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure         False   Sat, 20 Jun 2026 17:40:16 +0800   Sat, 20 Jun 2026 08:06:09 +0800   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure          False   Sat, 20 Jun 2026 17:40:16 +0800   Sat, 20 Jun 2026 08:06:09 +0800   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready                True    Sat, 20 Jun 2026 17:40:16 +0800   Sat, 20 Jun 2026 08:14:22 +0800   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  <IP_REDACTED>
+  Hostname:    <NODE_NAME_REDACTED>
+Capacity:
+  cpu:                24
+  ephemeral-storage:  102626232Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65475068Ki
+  nvidia.com/gpu:     10
+  pods:               110
+Allocatable:
+  cpu:                24
+  ephemeral-storage:  94580335255
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             65372668Ki
+  nvidia.com/gpu:     10
+  pods:               110
+System Info:
+  Machine ID:                 dc74e223dd434330a4d0b403801e0365
+  System UUID:                <UUID_REDACTED>
+  Boot ID:                    <UUID_REDACTED>
+  Kernel Version:             6.17.0-1025-oem
+  OS Image:                   Ubuntu 24.04.4 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  containerd://<CONTAINER_ID_REDACTED>.2.1
+  Kubelet Version:            v1.31.7
+  Kube-Proxy Version:         v1.31.7
+PodCIDR:                      <IP_REDACTED>/24
+PodCIDRs:                     <IP_REDACTED>/24
+Non-terminated Pods:          (11 in total)
+  Namespace                   Name                                         CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                         ------------  ----------  ---------------  -------------  ---
+  default                     vllm-hami-6689584f9b-sl89p                   0 (0%)        0 (0%)      0 (0%)           0 (0%)         5m27s
+  kube-flannel                kube-flannel-ds-nmdkq                        100m (0%)     0 (0%)      50Mi (0%)        0 (0%)         9h
+  kube-system                 coredns-7c65d6cfc9-k6zmf                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     9h
+  kube-system                 coredns-7c65d6cfc9-pxh7m                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     9h
+  kube-system                 etcd-<NODE_NAME_REDACTED>                       100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         9h
+  kube-system                 hami-device-plugin-7qjnd                     0 (0%)        0 (0%)      0 (0%)           0 (0%)         9h
+  kube-system                 hami-scheduler-54cbdf47d5-scgvr              0 (0%)        0 (0%)      0 (0%)           0 (0%)         9h
+  kube-system                 kube-apiserver-<NODE_NAME_REDACTED>             250m (1%)     0 (0%)      0 (0%)           0 (0%)         9h
+  kube-system                 kube-controller-manager-<NODE_NAME_REDACTED>    200m (0%)     0 (0%)      0 (0%)           0 (0%)         9h
+  kube-system                 kube-proxy-7dkfs                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         9h
+  kube-system                 kube-scheduler-<NODE_NAME_REDACTED>             100m (0%)     0 (0%)      0 (0%)           0 (0%)         9h
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                950m (3%)   0 (0%)
+  memory             290Mi (0%)  340Mi (0%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+  nvidia.com/gpu     1           1
+Events:              <none>
