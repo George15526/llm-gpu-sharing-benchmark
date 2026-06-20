@@ -32,7 +32,7 @@ async def one_request(session, url, model, prompt, max_tokens, temperature, requ
     usage = None
 
     try:
-        async with session.post(url, json=payload, timeout=None) as resp:
+        async with session.post(url, json=payload) as resp:
             if resp.status != 200:
                 error = f"HTTP {resp.status}: {await resp.text()}"
             else:
@@ -102,7 +102,12 @@ async def run(args):
     prompt = args.prompt
 
     connector = aiohttp.TCPConnector(limit=max(args.concurrency, len(endpoints)))
-    timeout = aiohttp.ClientTimeout(total=None)
+    timeout = aiohttp.ClientTimeout(
+        total=args.request_timeout_sec,
+        connect=args.connect_timeout_sec,
+        sock_connect=args.connect_timeout_sec,
+        sock_read=args.request_timeout_sec,
+    )
 
     results = []
 
@@ -236,7 +241,14 @@ def main():
     p.add_argument("--output-dir", required=True)
     p.add_argument("--endpoints", default=None, help="Comma-separated endpoint list. Requests will be distributed round-robin.")
     p.add_argument("--warmup-requests-per-endpoint", type=int, default=0, help="Number of warm-up requests sent to each endpoint before formal benchmark.")
+    p.add_argument("--connect-timeout-sec", type=float, default=10.0, help="HTTP connect timeout per request.")
+    p.add_argument("--request-timeout-sec", type=float, default=180.0, help="Total timeout per request.")
     args = p.parse_args()
+
+    if args.request_timeout_sec <= 0:
+        raise ValueError("--request-timeout-sec must be > 0")
+    if args.connect_timeout_sec <= 0:
+        raise ValueError("--connect-timeout-sec must be > 0")
 
     asyncio.run(run(args))
 
