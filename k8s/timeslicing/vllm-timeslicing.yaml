@@ -19,6 +19,7 @@ spec:
         mode: timeslicing
     spec:
       runtimeClassName: nvidia
+      terminationGracePeriodSeconds: 30
       containers:
       - name: vllm
         image: vllm/vllm-openai:v0.8.5
@@ -32,6 +33,16 @@ spec:
           periodSeconds: 5
           timeoutSeconds: 2
           failureThreshold: 60
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - bash
+              - -lc
+              - |
+                pkill -TERM -f 'vllm.entrypoints.openai.api_server|multiprocessing' || true
+                sleep 3
+                pkill -KILL -f 'vllm.entrypoints.openai.api_server|multiprocessing' || true
         env:
         - name: HF_HOME
           value: /models
