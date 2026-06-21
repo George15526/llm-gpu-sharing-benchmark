@@ -4,17 +4,9 @@
 # Prefer repeat group directories for formal experiments.
 
 # Legacy time-slicing baseline
-results/timeslicing/r1_c1_20260610-022818
-results/timeslicing/r1_c2_20260610-023050
-results/timeslicing/r1_c4_20260610-023257
-results/timeslicing/r2_c2_20260610-023439
-results/timeslicing/r4_c4_20260610-023635
+results/timeslicing/repeat_r1_c1_20260621-211051
+results/timeslicing/repeat_r1_c2_20260621-211656
+results/timeslicing/repeat_r1_c4_20260621-212319
+results/timeslicing/repeat_r2_c2_20260621-213030
 
 # Current HAMi experiments
-results/hami/config-aligned/repeat_r1_c1_20260620-170232
-results/hami/config-aligned/repeat_r1_c2_20260620-172519
-results/hami/config-aligned/repeat_r1_c4_20260620-173554
-results/hami/memory-aligned/repeat_r1_c1_20260620-120654
-results/hami/memory-aligned/repeat_r1_c2_20260620-122850
-results/hami/memory-aligned/repeat_r1_c4_20260620-130219
-results/hami/memory-aligned/repeat_r2_c2_20260620-124446

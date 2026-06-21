@@ -1,0 +1,29 @@
+{
+  "mode": "timeslicing",
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "num_requests": 100,
+  "concurrency": 2,
+  "max_tokens": 128,
+  "endpoint_count": 1,
+  "endpoints": [
+    "http://<ENDPOINT_REDACTED>"
+  ],
+  "endpoint_request_count": {
+    "http://<ENDPOINT_REDACTED>": 100
+  },
+  "warmup_requests_per_endpoint": 3,
+  "warmup_total_requests": 3,
+  "success_count": 100,
+  "failed_count": 0,
+  "duration_sec": 81.28821833699476,
+  "requests_per_sec": 1.2301905743023205,
+  "output_tokens_per_sec": 157.46439351069702,
+  "e2e_latency_avg_ms": 1617.659540650784,
+  "e2e_latency_p50_ms": 1616.588936012704,
+  "e2e_latency_p95_ms": 1660.2774780185428,
+  "e2e_latency_p99_ms": 1680.7711099972948,
+  "ttft_avg_ms": 811.1017937102588,
+  "ttft_p50_ms": 812.9415129951667,
+  "ttft_p95_ms": 840.7756009837613,
+  "ttft_p99_ms": 866.2458860198967
+}

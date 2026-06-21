@@ -1,33 +1,18 @@
 === Evidence ===
-Generated at: Sun Jun 21 06:01:10 AM CST 2026
+Generated at: Sun Jun 21 09:53:54 PM CST 2026
 Result root: results
 Evidence root: results/evidence
 Evidence manifest: evidence_manifest.txt
 
 === Git ===
 /home/<USER_REDACTED>/k8s/llm-gpu-sharing-benchmark
-2ce118df61753de5465020d61a7adccde7f2811a
- M README.md
- M docs/baseline-timeslicing.md
- M docs/experiment-design.md
- M docs/hami-experiment.md
- M docs/result-analysis.md
- M docs/troubleshooting.md
- D k8s/hami/vllm-hami.yaml
+532e375d0238cf09243dd706f9b018e7b48f9d25
+ M evidence_manifest.txt
  M k8s/timeslicing/vllm-timeslicing.yaml
- M results/evidence/README.md
- M scripts/bench_openai_stream.py
- M scripts/collect_evidence.sh
- M scripts/run_experiment.sh
- M scripts/run_repeated_experiments.sh
-?? evidence_manifest.txt
-?? k8s/hami/vllm-hami-config-aligned.yaml
-?? k8s/hami/vllm-hami-controlled.yaml
-?? k8s/hami/vllm-hami-memory-aligned.yaml
 ?? results/evidence/environment_snapshot.raw.txt
 
 === Date ===
-Sun Jun 21 06:01:10 AM CST 2026
+Sun Jun 21 09:53:54 PM CST 2026
 
 === Kubernetes ===
 Client Version: v1.31.7
@@ -36,7 +21,7 @@ Server Version: v1.31.14
 
 === Nodes ===
 NAME                STATUS   ROLES                  AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
-<NODE_NAME_REDACTED>   Ready    control-plane,worker   21h   v1.31.7   <IP_REDACTED>    <none>        Ubuntu 24.04.4 LTS   6.17.0-1025-oem   containerd://<CONTAINER_ID_REDACTED>.2.1
+<NODE_NAME_REDACTED>   Ready    control-plane,worker   37h   v1.31.7   <IP_REDACTED>    <none>        Ubuntu 24.04.4 LTS   6.17.0-1025-oem   containerd://<CONTAINER_ID_REDACTED>.2.1
 
 === Selected Node ===
 <NODE_NAME_REDACTED>
@@ -48,7 +33,7 @@ Capacity:
   hugepages-1Gi:      0
   hugepages-2Mi:      0
   memory:             65475068Ki
-  nvidia.com/gpu:     10
+  nvidia.com/gpu:     4
   pods:               110
 Allocatable:
   cpu:                24
@@ -56,7 +41,7 @@ Allocatable:
   hugepages-1Gi:      0
   hugepages-2Mi:      0
   memory:             65372668Ki
-  nvidia.com/gpu:     10
+  nvidia.com/gpu:     4
   pods:               110
 System Info:
   Machine ID:                 dc74e223dd434330a4d0b403801e0365
@@ -71,20 +56,22 @@ System Info:
   Kube-Proxy Version:         v1.31.7
 PodCIDR:                      <IP_REDACTED>/24
 PodCIDRs:                     <IP_REDACTED>/24
-Non-terminated Pods:          (11 in total)
+Non-terminated Pods:          (13 in total)
   Namespace                   Name                                         CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
   ---------                   ----                                         ------------  ----------  ---------------  -------------  ---
-  default                     vllm-hami-6689584f9b-j4k7l                   0 (0%)        0 (0%)      0 (0%)           0 (0%)         11h
-  kube-flannel                kube-flannel-ds-nmdkq                        100m (0%)     0 (0%)      50Mi (0%)        0 (0%)         21h
-  kube-system                 coredns-7c65d6cfc9-k6zmf                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     21h
-  kube-system                 coredns-7c65d6cfc9-pxh7m                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     21h
-  kube-system                 etcd-<NODE_NAME_REDACTED>                       100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         21h
-  kube-system                 hami-device-plugin-7qjnd                     0 (0%)        0 (0%)      0 (0%)           0 (0%)         21h
-  kube-system                 hami-scheduler-54cbdf47d5-scgvr              0 (0%)        0 (0%)      0 (0%)           0 (0%)         21h
-  kube-system                 kube-apiserver-<NODE_NAME_REDACTED>             250m (1%)     0 (0%)      0 (0%)           0 (0%)         21h
-  kube-system                 kube-controller-manager-<NODE_NAME_REDACTED>    200m (0%)     0 (0%)      0 (0%)           0 (0%)         21h
-  kube-system                 kube-proxy-7dkfs                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         21h
-  kube-system                 kube-scheduler-<NODE_NAME_REDACTED>             100m (0%)     0 (0%)      0 (0%)           0 (0%)         21h
+  default                     vllm-timeslicing-6c9ccdcb77-nqjn4            0 (0%)        0 (0%)      0 (0%)           0 (0%)         14m
+  default                     vllm-timeslicing-6c9ccdcb77-nwr5l            0 (0%)        0 (0%)      0 (0%)           0 (0%)         14m
+  default                     vllm-timeslicing-6c9ccdcb77-vqjnx            0 (0%)        0 (0%)      0 (0%)           0 (0%)         14m
+  default                     vllm-timeslicing-6c9ccdcb77-x7tvz            0 (0%)        0 (0%)      0 (0%)           0 (0%)         14m
+  kube-flannel                kube-flannel-ds-nmdkq                        100m (0%)     0 (0%)      50Mi (0%)        0 (0%)         37h
+  kube-system                 coredns-7c65d6cfc9-k6zmf                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     37h
+  kube-system                 coredns-7c65d6cfc9-pxh7m                     100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     37h
+  kube-system                 etcd-<NODE_NAME_REDACTED>                       100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         37h
+  kube-system                 kube-apiserver-<NODE_NAME_REDACTED>             250m (1%)     0 (0%)      0 (0%)           0 (0%)         37h
+  kube-system                 kube-controller-manager-<NODE_NAME_REDACTED>    200m (0%)     0 (0%)      0 (0%)           0 (0%)         37h
+  kube-system                 kube-proxy-7dkfs                             0 (0%)        0 (0%)      0 (0%)           0 (0%)         37h
+  kube-system                 kube-scheduler-<NODE_NAME_REDACTED>             100m (0%)     0 (0%)      0 (0%)           0 (0%)         37h
+  nvidia-device-plugin        nvdp-nvidia-device-plugin-9sfhd              0 (0%)        0 (0%)      0 (0%)           0 (0%)         65m
 Allocated resources:
   (Total limits may be over 100 percent, i.e., overcommitted.)
   Resource           Requests    Limits
@@ -94,30 +81,31 @@ Allocated resources:
   ephemeral-storage  0 (0%)      0 (0%)
   hugepages-1Gi      0 (0%)      0 (0%)
   hugepages-2Mi      0 (0%)      0 (0%)
-  nvidia.com/gpu     1           1
+  nvidia.com/gpu     4           4
 Events:              <none>
 
 === Pods ===
-NAMESPACE      NAME                                        READY   STATUS    RESTARTS      AGE   IP            NODE                NOMINATED NODE   READINESS GATES
-default        vllm-hami-6689584f9b-j4k7l                  1/1     Running   0             11h   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>
-default        vllm-hami-6689584f9b-n6fcf                  0/1     Pending   0             11h   <none>        <none>              <none>           <none>
-kube-flannel   kube-flannel-ds-nmdkq                       1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    coredns-7c65d6cfc9-k6zmf                    1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    coredns-7c65d6cfc9-pxh7m                    1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    etcd-<NODE_NAME_REDACTED>                      1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    hami-device-plugin-7qjnd                    2/2     Running   5 (18h ago)   21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    hami-scheduler-54cbdf47d5-scgvr             2/2     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    kube-apiserver-<NODE_NAME_REDACTED>            1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    kube-controller-manager-<NODE_NAME_REDACTED>   1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    kube-proxy-7dkfs                            1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
-kube-system    kube-scheduler-<NODE_NAME_REDACTED>            1/1     Running   0             21h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+NAMESPACE              NAME                                        READY   STATUS    RESTARTS        AGE   IP            NODE                NOMINATED NODE   READINESS GATES
+default                vllm-timeslicing-6c9ccdcb77-nqjn4           0/1     Running   7 (5m16s ago)   14m   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>
+default                vllm-timeslicing-6c9ccdcb77-nwr5l           1/1     Running   0               14m   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>
+default                vllm-timeslicing-6c9ccdcb77-vqjnx           1/1     Running   2 (13m ago)     14m   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>
+default                vllm-timeslicing-6c9ccdcb77-x7tvz           1/1     Running   0               14m   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>
+kube-flannel           kube-flannel-ds-nmdkq                       1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+kube-system            coredns-7c65d6cfc9-k6zmf                    1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+kube-system            coredns-7c65d6cfc9-pxh7m                    1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+kube-system            etcd-<NODE_NAME_REDACTED>                      1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+kube-system            kube-apiserver-<NODE_NAME_REDACTED>            1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+kube-system            kube-controller-manager-<NODE_NAME_REDACTED>   1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+kube-system            kube-proxy-7dkfs                            1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+kube-system            kube-scheduler-<NODE_NAME_REDACTED>            1/1     Running   0               37h   <IP_REDACTED>    <NODE_NAME_REDACTED>   <none>           <none>
+nvidia-device-plugin   nvdp-nvidia-device-plugin-9sfhd             2/2     Running   0               65m   <IP_REDACTED>   <NODE_NAME_REDACTED>   <none>           <none>
 
 === RuntimeClass ===
 NAME     HANDLER   AGE
-nvidia   nvidia    21h
+nvidia   nvidia    37h
 
 === NVIDIA SMI ===
-Sun Jun 21 06:01:10 2026       
+Sun Jun 21 21:53:55 2026       
 +-----------------------------------------------------------------------------------------+
 | NVIDIA-SMI 595.71.05              Driver Version: 595.71.05      CUDA Version: 13.2     |
 +-----------------------------------------+------------------------+----------------------+
@@ -126,7 +114,7 @@ Sun Jun 21 06:01:10 2026
 |                                         |                        |               MIG M. |
 |=========================================+========================+======================|
 |   0  NVIDIA RTX 2000 Ada Gene...    Off |   00000000:47:00.0 Off |                  Off |
-| 30%   36C    P8              5W /   70W |    2958MiB /  16380MiB |      0%      Default |
+| 30%   36C    P8              5W /   70W |    3594MiB /  16380MiB |      0%      Default |
 |                                         |                        |                  N/A |
 +-----------------------------------------+------------------------+----------------------+
 
@@ -135,5 +123,7 @@ Sun Jun 21 06:01:10 2026
 |  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
 |        ID   ID                                                               Usage      |
 |=========================================================================================|
-|    0   N/A  N/A         <PID_OR_ID_REDACTED>      C   /usr/bin/python3                       2936MiB |
+|    0   N/A  N/A         <PID_OR_ID_REDACTED>      C   /usr/bin/python3                       1178MiB |
+|    0   N/A  N/A         <PID_OR_ID_REDACTED>      C   /usr/bin/python3                       1238MiB |
+|    0   N/A  N/A         <PID_OR_ID_REDACTED>      C   /usr/bin/python3                       1158MiB |
 +-----------------------------------------------------------------------------------------+

@@ -1,0 +1,16 @@
+{
+  "mode": "timeslicing",
+  "hami_profile": "",
+  "replicas": 2,
+  "concurrency": 2,
+  "num_requests": 100,
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "max_tokens": 128,
+  "warmup_requests_per_endpoint": 3,
+  "endpoint_count": 2,
+  "endpoints": "http://<ENDPOINT_REDACTED>,http://<ENDPOINT_REDACTED>",
+  "node_name": "<NODE_NAME_REDACTED>",
+  "deploy_manifest": "k8s/timeslicing/vllm-timeslicing.yaml",
+  "out_dir": "results/timeslicing/repeat_r2_c2_20260621-213030/r2_c2_20260621-213239",
+  "timestamp": "20260621-213239"
+}
