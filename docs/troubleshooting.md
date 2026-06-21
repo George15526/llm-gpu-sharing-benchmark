@@ -198,3 +198,16 @@ Run 3：reuse existing ready Pods → warm-up → formal benchmark
 - 已遮蔽後的 endpoint / Pod / node / nvidia-smi 文字快照
 
 不建議將 `k8s_metrics/`、raw `pods_*.yaml`、`requests.jsonl`、repo 內的 `scripts/`、`k8s/`、`docs/` 重複放進 evidence。
+
+
+## Time-slicing r4_c4 啟動失敗：No available memory for cache blocks
+
+在目前單張 RTX 2000 Ada 的 time-slicing 重新執行環境中，`r4_c4` 可能於第 4 個 vLLM Pod 啟動時出現：
+
+```text
+ValueError: No available memory for the cache blocks. Try increasing `gpu_memory_utilization` when initializing the engine.
+```
+
+此錯誤發生於 vLLM KV cache 初始化階段，代表 Kubernetes 雖可透過 time-slicing 將多個 `nvidia.com/gpu` replica 排程到同一張 GPU，但 time-slicing 不提供 GPU memory quota 或 memory isolation。若多個 vLLM instance 同時啟動，仍可能因實體 GPU memory contention 導致 EngineCore 初始化失敗。
+
+本專案目前將 `r4_c4` 視為 time-slicing 的限制案例，不納入正式成功 benchmark 表格。若要強行測試 `r4_c4`，應另建低記憶體 profile，例如降低 `gpu-memory-utilization` 或 `max-num-batched-tokens`；但此結果不應與目前 HAMi `memory-aligned` 設定直接混合比較。
